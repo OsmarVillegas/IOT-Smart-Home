@@ -56,7 +56,7 @@ Implementar un sistema de análisis del ambiente que monitoree condiciones como 
 |3|Fotorresistencia|Sensor capaz de medir la oscuridad del ambiente.|![image](./Imagenes/Fotoresistor.jpeg)|2|$13,97 MXN|
 |4|DFPlayer-Mini Módulo|Modulo DFPlayer permite la reproducción de audios grabados en una memoria sd.|![image](./Imagenes/DFPlayer.jpeg)|1|$26,46 MXN|
 |5|Bocina|Bocina para reproducir musica utilizando el modulo DFPlayer-mini.|![image](./Imagenes/Bocina.jpeg)|1|$0,00 MXN|
-|6|Tarjeta SD|Tarjeta SD para reproducir musica utilizando el modulo DFPlayer-mini.|![image](./Imagenes/SD.jpeg)|1|$150,00 MXN|
+|6|Tarjeta SD|Tarjeta SD para reproducir musica utilizando el modulo DFPlayer-mini.|![image](./Imagenes/SD.jpg)|1|$150,00 MXN|
 |7|ESP32|ESP32 es la denominación de una familia de chips SoC de bajo coste y consumo de energía, con tecnología Wi-Fi y Bluetooth de modo dual integrada.|![image](./Imagenes/Esp32.jpg)|2|$250,00 MXN|
 |8|Pantalla (Weareble)|Reloj inteligente ESP32, dispositivo programable con WIFI, Bluetooth, papel electrónico, Hardware y Software de código abierto|![image](./Imagenes/Esp32_E-Watch.jpeg)|1|$356,64 MXN|
 |9|Relevador 5V KY-019| El Relevador 5V KY-019 es un dispositivo electrónico que permite controlar dispositivos por medio de un puente|![image](./Imagenes/Relevador.jpeg)|1|$19,00 MXN|
@@ -99,7 +99,7 @@ Implementar un sistema de análisis del ambiente que monitoree condiciones como 
 ## Codigo
 
 
-## Fritzing
+## Diagrama
 ![image](./Imagenes/Circuito.PNG)
 
 ## Pantallas Flutter
