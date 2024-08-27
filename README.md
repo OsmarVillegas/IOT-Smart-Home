@@ -349,6 +349,32 @@ class Player:
 
 ## Pantallas Flutter
 
+### Main
+![image](https://github.com/user-attachments/assets/6c12b443-b5c5-48d2-8f64-cd1bdae8bac9)
+
+### Luz
+![image](https://github.com/user-attachments/assets/dfb74d30-dafb-4d71-8e2b-006c4daed80b)
+
+### Temperatura
+![image](https://github.com/user-attachments/assets/7a04f1df-b56e-4b47-a36c-3ff62e098863)
+
+### Humedad
+![image](https://github.com/user-attachments/assets/b480efcc-9909-41e5-ab59-fd740213fd92)
+
+### Gas
+![image](https://github.com/user-attachments/assets/d4dfa266-0da4-448c-acc4-82c9838e394e)
+
+### Wereable
+![image](https://github.com/user-attachments/assets/45fa2164-6e20-41b8-bc07-1d09e0c405e3)
+
+
+## Node-Red Flows
+
+### Produccion
+![image](https://github.com/user-attachments/assets/434f2844-97e6-4979-b3f4-2ef63d88b698)
+### Test
+![image](https://github.com/user-attachments/assets/44db9dc7-54d0-457d-8c47-f4fa80ce26e9)
+
 
 ## Video demostracion
 [Link del video](https://drive.google.com/file/d/1IX2vUpmbipwm-nlV36v6pP7F3DbX74k3/view?usp=sharing)

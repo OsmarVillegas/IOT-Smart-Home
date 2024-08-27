@@ -1,0 +1,345 @@
+[
+    {
+        "id": "1a6bf87bce12a11d",
+        "type": "tab",
+        "label": "IOT_proyecto",
+        "disabled": true,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "5f143c0bab5b3b14",
+        "type": "mqtt in",
+        "z": "1a6bf87bce12a11d",
+        "name": "",
+        "topic": "project/luz/data",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "b6d58b4a604ffe51",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 220,
+        "y": 120,
+        "wires": [
+            [
+                "fe8e3a1fdd3470c0",
+                "b58dac1960548342"
+            ]
+        ]
+    },
+    {
+        "id": "b58dac1960548342",
+        "type": "postgresql",
+        "z": "1a6bf87bce12a11d",
+        "name": "InsertPhotoresistor",
+        "query": "INSERT INTO photoresistor(value) VALUES({{{msg.payload}}});",
+        "postgreSQLConfig": "3cd515a78cadaa56",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 470,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fe8e3a1fdd3470c0",
+        "type": "function",
+        "z": "1a6bf87bce12a11d",
+        "name": "function 2",
+        "func": "msg.payload = {\n    \"value\": msg.payload\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "173bcffd3328c165",
+        "type": "comment",
+        "z": "1a6bf87bce12a11d",
+        "name": "Insertar Datos Postgresql",
+        "info": " ",
+        "x": 250,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "5eea51eac1fc37c6",
+        "type": "inject",
+        "z": "1a6bf87bce12a11d",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1800",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 230,
+        "y": 600,
+        "wires": [
+            [
+                "559a780b5402bc58"
+            ]
+        ]
+    },
+    {
+        "id": "559a780b5402bc58",
+        "type": "postgresql",
+        "z": "1a6bf87bce12a11d",
+        "name": "InsertPhotoresistorHistoric",
+        "query": "SELECT calculate_average_sensors();",
+        "postgreSQLConfig": "3cd515a78cadaa56",
+        "split": false,
+        "rowsPerMsg": "1",
+        "outputs": 1,
+        "x": 480,
+        "y": 600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bd3c66cdebcf34f2",
+        "type": "mqtt in",
+        "z": "1a6bf87bce12a11d",
+        "name": "",
+        "topic": "project/humedad/data",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "b6d58b4a604ffe51",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 240,
+        "y": 240,
+        "wires": [
+            [
+                "bd0ae4ee08b32bd7",
+                "0adc77e720f0c5ef"
+            ]
+        ]
+    },
+    {
+        "id": "0adc77e720f0c5ef",
+        "type": "postgresql",
+        "z": "1a6bf87bce12a11d",
+        "name": "InsertHumedad",
+        "query": "INSERT INTO humidity(value) VALUES({{{msg.payload}}});",
+        "postgreSQLConfig": "3cd515a78cadaa56",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 460,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bd0ae4ee08b32bd7",
+        "type": "function",
+        "z": "1a6bf87bce12a11d",
+        "name": "function 9",
+        "func": "msg.payload = {\n    \"value\": msg.payload\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2e365ac09509f212",
+        "type": "mqtt in",
+        "z": "1a6bf87bce12a11d",
+        "name": "",
+        "topic": "project/temperatura/data",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "b6d58b4a604ffe51",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 250,
+        "y": 360,
+        "wires": [
+            [
+                "d12513953bffdd71",
+                "b15d91f99feae57c"
+            ]
+        ]
+    },
+    {
+        "id": "b15d91f99feae57c",
+        "type": "postgresql",
+        "z": "1a6bf87bce12a11d",
+        "name": "InsertTemperatura",
+        "query": "INSERT INTO temperature(value) VALUES({{{msg.payload}}});",
+        "postgreSQLConfig": "3cd515a78cadaa56",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 510,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d12513953bffdd71",
+        "type": "function",
+        "z": "1a6bf87bce12a11d",
+        "name": "function 10",
+        "func": "msg.payload = {\n    \"value\": msg.payload\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7c3c69b08e54e3aa",
+        "type": "mqtt in",
+        "z": "1a6bf87bce12a11d",
+        "name": "",
+        "topic": "project/gas/data",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "b6d58b4a604ffe51",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 220,
+        "y": 460,
+        "wires": [
+            [
+                "6d6fac5b7123fe8d",
+                "9217e66c2e686c0c"
+            ]
+        ]
+    },
+    {
+        "id": "9217e66c2e686c0c",
+        "type": "postgresql",
+        "z": "1a6bf87bce12a11d",
+        "name": "InsertGas",
+        "query": "INSERT INTO gas(value) VALUES({{{msg.payload}}});",
+        "postgreSQLConfig": "3cd515a78cadaa56",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 440,
+        "y": 500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6d6fac5b7123fe8d",
+        "type": "function",
+        "z": "1a6bf87bce12a11d",
+        "name": "function 11",
+        "func": "msg.payload = {\n    \"value\": msg.payload\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b6d58b4a604ffe51",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "broker.emqx.io",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "3cd515a78cadaa56",
+        "type": "postgreSQLConfig",
+        "name": "test",
+        "host": "127.0.0.1",
+        "hostFieldType": "str",
+        "port": "5432",
+        "portFieldType": "num",
+        "database": "test",
+        "databaseFieldType": "str",
+        "ssl": "false",
+        "sslFieldType": "bool",
+        "applicationName": "",
+        "applicationNameType": "str",
+        "max": "10",
+        "maxFieldType": "num",
+        "idle": "1000",
+        "idleFieldType": "num",
+        "connectionTimeout": "10000",
+        "connectionTimeoutFieldType": "num",
+        "user": "",
+        "userFieldType": "str",
+        "password": "",
+        "passwordFieldType": "str"
+    }
+]
