@@ -141,9 +141,7 @@ music.loop()
 def conectar_wifi():
     sta_if = network.WLAN(network.STA_IF)
     sta_if.active(True)
-#    sta_if.connect("Ubee28C4-2.4G", "96E6F328C4")
-#    sta_if.connect("CGA2121_kT4wGw5", "DShSK218as127")
-    sta_if.connect("Armandoxx", "9439408d1ec3")
+    sta_if.connect("Usuario", "contraseña")
     while not sta_if.isconnected():
         print(".", end="")
         sleep(0.1)
