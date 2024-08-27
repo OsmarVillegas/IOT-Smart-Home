@@ -15,28 +15,28 @@ Diseñar y desarrollar un sistema de IoT (Internet de las cosas) que permita mon
 Implementar un sistema de análisis del ambiente que monitoree condiciones como luz, temperatura, Metano en el ambiente, clima, hora y número de pasos. Basado en los resultados, el sistema almacena la información para su posterior análisis y permite la activación de mecanismos como un ventilador o música.
 
 ## Arquitectura
-![image](./Imagenes/Arquitectura.jpg)
+![image](./Imagenes/Arquitectura.PNG)
 
 ## Librerias Utilizadas
 - Pin
 
+- ADC
+
 - Sleep
 
-- SoftwareSerial
+- dfplayermini
 
-- DFRobotDFPlayerMini
+- _thread
 
-- Wire
+- network
 
-- LiquidCrystal_I2C
+- umqtt.simple
 
-- WiFi
+- utime
 
-- PubSubClient
+- UART
 
-- I2C (Inter-Integrated Circuit)
-
-- ssd1306.py
+- Timer
 
 ## Tabla de Software utilizado
 | Id | Software | Version | Tipo |
@@ -51,7 +51,7 @@ Implementar un sistema de análisis del ambiente que monitoree condiciones como 
 ## Tabla con el hardware utilizado (El costo de cada componente es al dia de 2 de junio del 2024)
 | Id | Componente | Descripción | Imagen | Cantidad | Costo total |
 |----|------------|-------------|--------|----------|-------------|
-|1|Sensor de temperatura DHT22|Sensor para medir la temperatura del ambiente. |![image](/Imagenes/Modulo_DHT22.jpeg)|1|$17,04 MXN|
+|1|Sensor de temperatura DHT22|Sensor para medir la temperatura del ambiente. |![image](/Imagenes/Modulo_DHT22.jpg)|1|$17,04 MXN|
 |2|Sensor de gas MQ-9| Sensor para medir concentraciones de Metáno (CH4) y Gas Licuado de Petróleo (GLP).|![image](/Imagenes/Modulo_Gas.jpeg)|$47.00 MXN|   
 |3|Fotorresistencia|Sensor capaz de medir la oscuridad del ambiente.|![image](./Imagenes/Fotoresistor.jpeg)|2|$13,97 MXN|
 |4|DFPlayer-Mini Módulo|Modulo DFPlayer permite la reproducción de audios grabados en una memoria sd.|![image](./Imagenes/DFPlayer.jpeg)|1|$26,46 MXN|
@@ -97,7 +97,252 @@ Implementar un sistema de análisis del ambiente que monitoree condiciones como 
 ![image](./Imagenes/Prototipo.PNG)
 
 ## Codigo
+### main.py
+```python 
+from machine import Pin, ADC
+from time import sleep
+import dht
+from dfplayermini import Player
+from _thread import start_new_thread
+# Conexión wifi, manejar instancias de un cliente MQTT
+import network
+from umqtt.simple import MQTTClient
+import utime
 
+# Constantes para conexión con el cliente MQTT
+MQTT_CLIENT_ID = ""
+MQTT_BROKER = "broker.emqx.io"
+MQTT_USER = ""
+MQTT_PASSWORD = ""
+MQTT_TOPIC1 = "project/temperatura/data"
+MQTT_TOPIC2 = "project/humedad/data"
+MQTT_TOPIC3 = "project/gas/data"
+MQTT_TOPIC4 = "project/luz/data"
+MQTT_TOPIC5 = "project/music/data"
+MQTT_TOPIC6 = "project/ventilador/data"
+MQTT_TOPIC7 = "project/system/data"
+MQTT_PORT = 1883
+
+# Creando objetos
+sensor_dht = dht.DHT22(Pin(14))
+sensor_gas = ADC (Pin(32))
+photoresistor = ADC(Pin(35, Pin.IN))
+music = Player(pin_TX=27, pin_RX=26)
+
+# Ajustamos al resolución y voltaje de trabajo
+sensor_gas.width(ADC.WIDTH_10BIT)
+sensor_gas.atten(ADC.ATTN_11DB)
+photoresistor.atten(photoresistor.ATTN_11DB)
+rele = Pin(5, Pin.OUT)
+sleep(1)
+music.loop()
+
+# Funcion para conectar a una red wifi
+def conectar_wifi():
+    sta_if = network.WLAN(network.STA_IF)
+    sta_if.active(True)
+#    sta_if.connect("Ubee28C4-2.4G", "96E6F328C4")
+#    sta_if.connect("CGA2121_kT4wGw5", "DShSK218as127")
+    sta_if.connect("Armandoxx", "9439408d1ec3")
+    while not sta_if.isconnected():
+        print(".", end="")
+        sleep(0.1)
+    print("Conectado!")
+
+def mensaje_recibido(MQTT_TOPIC5, mensaje):
+    datos = int(mensaje)
+    sleep(1)
+    music.volume(12)
+    print("Bocina: " + str(datos))
+    if datos == 1:
+        sleep(1)
+        music.play(4)
+    else:
+        sleep(1)
+        music.pause()
+
+def subscribir_broker():
+    cliente = MQTTClient("", MQTT_BROKER)
+    cliente.set_callback(mensaje_recibido)
+    cliente.connect()
+    cliente.subscribe(MQTT_TOPIC5)
+    print("Suscrito Musica")
+    return cliente
+
+def mensaje_recibido2(MQTT_TOPIC6, mensaje):
+    datos = int(mensaje)
+    print("Ventilador: " + str(datos))
+    if datos == 1:
+        rele.value(1)
+        utime.sleep(2)
+    else:
+        rele.value(0)
+
+def subscribir_broker2():
+    cliente = MQTTClient("", MQTT_BROKER)
+    cliente.set_callback(mensaje_recibido2)
+    cliente.connect()
+    cliente.subscribe(MQTT_TOPIC6)
+    print("Suscrito Ventilador")
+    return cliente
+
+def conectar_Broker():
+    print("Conectar al broker: ", MQTT_BROKER)
+    cliente = MQTTClient(MQTT_CLIENT_ID,MQTT_BROKER,user=MQTT_USER, password=MQTT_PASSWORD, port = MQTT_PORT, keepalive=3)
+    cliente.set_last_will(MQTT_TOPIC7, str(0), retain=True)
+    cliente.connect()
+    print("Conectar broker")
+    return cliente
+
+# Ciclo core 0
+def loop():
+    try:
+        while True:
+            # Leer el sensor
+            sensor_dht.measure()
+            temperatura = sensor_dht.temperature()
+            humedad = sensor_dht.humidity()
+            lectura_gas = int(sensor_gas.read())
+            lectura_luz = photoresistor.read()
+        
+            utime.sleep(2)
+    
+            ppm = 400 / 1023
+            co = ppm * lectura_gas
+        
+            # Publicar información
+            cliente.publish(MQTT_TOPIC1, str(temperatura))
+            cliente.publish(MQTT_TOPIC2, str(humedad))
+            cliente.publish(MQTT_TOPIC3, str(lectura_gas))
+            cliente.publish(MQTT_TOPIC4, str(lectura_luz))
+    except KeyboardInterrupt:
+        cliente.sock.close()
+
+def loop2():
+    while True:
+        music.loop()
+        cliente_subs.check_msg()
+        sleep(1)
+        cliente_subs_2.check_msg()
+        sleep(1)
+
+    
+# Antes de iniciar el ciclo
+conectar_wifi()
+cliente = conectar_Broker()
+cliente_subs = subscribir_broker()
+cliente_subs_2 = subscribir_broker2()
+cliente.publish(MQTT_TOPIC7, str(1), retain=True)
+
+# Generar loop en el segundo core
+start_new_thread(loop2, ())
+loop()
+```
+
+### dfplayermini.py
+```python
+import utime
+from machine import UART, Timer
+
+IDLE = 0
+PAUSED = 1
+PLAYING = 2
+
+
+class Player:
+    def __init__(self, pin_TX, pin_RX):
+        self.uart = UART(1, 9600, tx=pin_TX, rx=pin_RX)
+        self.cmd(0x3F)  # send initialization parametres
+        self._fadeout_timer = Timer(-1)
+
+        self._volume = 15
+        self._max_volume = 15
+        self._fadeout_speed = 0
+
+    def cmd(self, command, parameter=0x00):
+        query = bytes([0x7e, 0xFF, 0x06, command,
+                       0x00, 0x00, parameter, 0xEF])
+        self.uart.write(query)
+
+    def _fade_out_process(self, timer):
+        new_volume = self._volume - self._fadeout_speed
+        
+        if new_volume <= 0:
+            print("fadeout finished")
+            new_volume = 0
+            self._fadeout_timer.deinit()
+            self.stop()
+            new_volume = self._max_volume # reset volume to max 
+        self.volume(new_volume)
+
+    # playback
+
+    def play(self, track_id=False):
+        if not track_id:
+            self.resume()
+        elif track_id == 'next':
+            self.cmd(0x01)
+        elif track_id == 'prev':
+            self.cmd(0x02)
+        elif isinstance(track_id, int):
+            self.cmd(0x03, track_id)
+
+    def pause(self):
+        self.cmd(0x0E)
+
+    def resume(self):
+        self.cmd(0x0D)
+
+    def stop(self):
+        self.cmd(0x16)
+
+    def fadeout(self, fadeout_ms=1000):
+        # more than 500ms and less than 3000ms
+        fadeout_ms = int(sorted([500, fadeout_ms, 3000])[1])
+        fade_out_step_ms = 100
+        self._fadeout_speed = self._volume * \
+            fade_out_step_ms / fadeout_ms  # ten steps per second
+        self._fadeout_timer.init(
+            period=fade_out_step_ms, callback=self._fade_out_process)
+
+    def loop_track(self, track_id):
+        self.cmd(0x08, track_id)
+
+    def loop(self):
+        self.cmd(0x19)
+
+    def loop_disable(self):
+        self.cmd(0x19, 0x01)
+
+    # volume control
+
+    def volume_up(self):
+        self._volume += 1
+        self.cmd(0x04)
+
+    def volume_down(self):
+        self._volume -= 1
+        self.cmd(0x05)
+
+    def volume(self, volume=False):
+        if volume:
+            self._volume = int(sorted([0, volume, self._max_volume])[1])
+            print("volume", self._volume)
+            self.cmd(0x06, self._volume)
+        
+        return self._volume
+
+    # hardware
+
+    def module_sleep(self):
+        self.cmd(0x0A)
+
+    def module_wake(self):
+        self.cmd(0x0B)
+
+    def module_reset(self):
+        self.cmd(0x0C)
+```
 
 ## Diagrama
 ![image](./Imagenes/Circuito.PNG)
@@ -106,18 +351,10 @@ Implementar un sistema de análisis del ambiente que monitoree condiciones como 
 
 
 ## Video demostracion
-
+[Link del video](https://drive.google.com/file/d/1IX2vUpmbipwm-nlV36v6pP7F3DbX74k3/view?usp=sharing)
 
 ## Carta de agradecimiento
 ![Carta](./Imagenes/Carta_Agradecimiento.jpg)
 
 ## Evidencias fotograficas
-
-
-
-
-
-
-
-
 
