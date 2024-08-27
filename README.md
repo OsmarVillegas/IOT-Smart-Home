@@ -381,4 +381,5 @@ class Player:
 ![Carta](./Imagenes/Carta_Agradecimiento.jpg)
 
 ## Evidencias fotograficas
-
+![image](./Imagenes/foto_1.jpg)
+![image](./Imagenes/foto_2.jpg)
