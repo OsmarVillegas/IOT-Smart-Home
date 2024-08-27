@@ -123,6 +123,13 @@ Implementar un sistema de análisis del ambiente que monitoree condiciones como 
 ![image](https://github.com/user-attachments/assets/45fa2164-6e20-41b8-bc07-1d09e0c405e3)
 
 
+## Node-Red Flows
+
+### Produccion
+![image](https://github.com/user-attachments/assets/434f2844-97e6-4979-b3f4-2ef63d88b698)
+### Test
+![image](https://github.com/user-attachments/assets/44db9dc7-54d0-457d-8c47-f4fa80ce26e9)
+
 
 ## Video demostracion
 
