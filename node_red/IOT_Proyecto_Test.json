@@ -1,0 +1,718 @@
+[
+    {
+        "id": "f7b17fea9c45f501",
+        "type": "tab",
+        "label": "IOT_Proyecto_Test",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "a6c876ee18a6a1dc",
+        "type": "inject",
+        "z": "f7b17fea9c45f501",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 250,
+        "y": 180,
+        "wires": [
+            [
+                "00a204fa3f5b1206"
+            ]
+        ]
+    },
+    {
+        "id": "00a204fa3f5b1206",
+        "type": "function",
+        "z": "f7b17fea9c45f501",
+        "name": "function 3",
+        "func": "// Configuración de los límites para el número aleatorio\nconst min = 0; // Valor mínimo (inclusivo)\nconst max = 50; // Valor máximo (inclusive)\n\n// Generar un número aleatorio en el rango [min, max]\nconst randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;\n\n// Asignar el número aleatorio al payload del mensaje\nmsg.payload = randomNumber;\n\n// Devolver el mensaje\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 180,
+        "wires": [
+            [
+                "adaafa7c736db959",
+                "bf2892d1adabbc99"
+            ]
+        ]
+    },
+    {
+        "id": "adaafa7c736db959",
+        "type": "mqtt out",
+        "z": "f7b17fea9c45f501",
+        "name": "",
+        "topic": "project/luz/data",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "33d91667498d570b",
+        "x": 640,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "bf2892d1adabbc99",
+        "type": "debug",
+        "z": "f7b17fea9c45f501",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "0bc17817c663455c",
+        "type": "comment",
+        "z": "f7b17fea9c45f501",
+        "name": "Test",
+        "info": "",
+        "x": 210,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "2ce9a84f40aeec1c",
+        "type": "inject",
+        "z": "f7b17fea9c45f501",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 250,
+        "y": 320,
+        "wires": [
+            [
+                "ef3adc915c4feab4"
+            ]
+        ]
+    },
+    {
+        "id": "ef3adc915c4feab4",
+        "type": "function",
+        "z": "f7b17fea9c45f501",
+        "name": "function 4",
+        "func": "// Configuración de los límites para el número aleatorio\nconst min = 0; // Valor mínimo (inclusivo)\nconst max = 50; // Valor máximo (inclusive)\n\n// Generar un número aleatorio en el rango [min, max]\nconst randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;\n\n// Asignar el número aleatorio al payload del mensaje\nmsg.payload = randomNumber;\n\n// Devolver el mensaje\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 320,
+        "wires": [
+            [
+                "38b51280d461a633",
+                "bee15386308f8956"
+            ]
+        ]
+    },
+    {
+        "id": "38b51280d461a633",
+        "type": "mqtt out",
+        "z": "f7b17fea9c45f501",
+        "name": "",
+        "topic": "project/temperatura/data",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "b6d58b4a604ffe51",
+        "x": 670,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "bee15386308f8956",
+        "type": "debug",
+        "z": "f7b17fea9c45f501",
+        "name": "debug 6",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "5dc9aff79341df35",
+        "type": "inject",
+        "z": "f7b17fea9c45f501",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 250,
+        "y": 440,
+        "wires": [
+            [
+                "b9f1f7dbb7560fdf"
+            ]
+        ]
+    },
+    {
+        "id": "b9f1f7dbb7560fdf",
+        "type": "function",
+        "z": "f7b17fea9c45f501",
+        "name": "function 5",
+        "func": "// Configuración de los límites para el número aleatorio\nconst min = 0; // Valor mínimo (inclusivo)\nconst max = 50; // Valor máximo (inclusive)\n\n// Generar un número aleatorio en el rango [min, max]\nconst randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;\n\n// Asignar el número aleatorio al payload del mensaje\nmsg.payload = randomNumber;\n\n// Devolver el mensaje\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 440,
+        "wires": [
+            [
+                "d9b3f481e9ba7cf9",
+                "098dd3c15bf9f1e4"
+            ]
+        ]
+    },
+    {
+        "id": "d9b3f481e9ba7cf9",
+        "type": "mqtt out",
+        "z": "f7b17fea9c45f501",
+        "name": "",
+        "topic": "project/humedad/data",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "b6d58b4a604ffe51",
+        "x": 660,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "098dd3c15bf9f1e4",
+        "type": "debug",
+        "z": "f7b17fea9c45f501",
+        "name": "debug 7",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "f6cea0b35441d23c",
+        "type": "inject",
+        "z": "f7b17fea9c45f501",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 250,
+        "y": 580,
+        "wires": [
+            [
+                "b089b68ff7a0592e"
+            ]
+        ]
+    },
+    {
+        "id": "b089b68ff7a0592e",
+        "type": "function",
+        "z": "f7b17fea9c45f501",
+        "name": "function 6",
+        "func": "// Configuración de los límites para el número aleatorio\nconst min = 0; // Valor mínimo (inclusivo)\nconst max = 50; // Valor máximo (inclusive)\n\n// Generar un número aleatorio en el rango [min, max]\nconst randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;\n\n// Asignar el número aleatorio al payload del mensaje\nmsg.payload = randomNumber;\n\n// Devolver el mensaje\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 580,
+        "wires": [
+            [
+                "51470c3bc14f2d64",
+                "208d41e708e08415",
+                "c02bbe1969cfa486",
+                "9927dfb2bf28dc25"
+            ]
+        ]
+    },
+    {
+        "id": "51470c3bc14f2d64",
+        "type": "mqtt out",
+        "z": "f7b17fea9c45f501",
+        "name": "",
+        "topic": "wearable/temperatura/data",
+        "qos": "",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "b6d58b4a604ffe51",
+        "x": 680,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "208d41e708e08415",
+        "type": "debug",
+        "z": "f7b17fea9c45f501",
+        "name": "debug 8",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "c02bbe1969cfa486",
+        "type": "mqtt out",
+        "z": "f7b17fea9c45f501",
+        "name": "",
+        "topic": "wearable/paso/data",
+        "qos": "",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "b6d58b4a604ffe51",
+        "x": 650,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "9927dfb2bf28dc25",
+        "type": "mqtt out",
+        "z": "f7b17fea9c45f501",
+        "name": "",
+        "topic": "wearable/batteria/data",
+        "qos": "",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "b6d58b4a604ffe51",
+        "x": 660,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "312ba6cc3f4ec2bb",
+        "type": "inject",
+        "z": "f7b17fea9c45f501",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 250,
+        "y": 820,
+        "wires": [
+            [
+                "f65db599b3836cf9"
+            ]
+        ]
+    },
+    {
+        "id": "f65db599b3836cf9",
+        "type": "function",
+        "z": "f7b17fea9c45f501",
+        "name": "function 7",
+        "func": "// Configuración de los límites para el número aleatorio\nconst min = 0; // Valor mínimo (inclusivo)\nconst max = 50; // Valor máximo (inclusive)\n\n// Generar un número aleatorio en el rango [min, max]\nconst randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;\n\n// Asignar el número aleatorio al payload del mensaje\nmsg.payload = randomNumber;\n\n// Devolver el mensaje\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 820,
+        "wires": [
+            [
+                "cbc368ed73b20de0",
+                "d734fc9ae6f72c0a"
+            ]
+        ]
+    },
+    {
+        "id": "cbc368ed73b20de0",
+        "type": "mqtt out",
+        "z": "f7b17fea9c45f501",
+        "name": "",
+        "topic": "project/gas/data",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "b6d58b4a604ffe51",
+        "x": 640,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "d734fc9ae6f72c0a",
+        "type": "debug",
+        "z": "f7b17fea9c45f501",
+        "name": "debug 9",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "350c473f7d091fd7",
+        "type": "inject",
+        "z": "f7b17fea9c45f501",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 240,
+        "y": 980,
+        "wires": [
+            [
+                "4a45e976abb11ae1"
+            ]
+        ]
+    },
+    {
+        "id": "4a45e976abb11ae1",
+        "type": "function",
+        "z": "f7b17fea9c45f501",
+        "name": "function 8",
+        "func": "\n// Asignar el número aleatorio al payload del mensaje\nmsg.payload = '1';\n\n// Devolver el mensaje\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 980,
+        "wires": [
+            [
+                "fb844e5c1e006cb6",
+                "49e8c220bee1a76d"
+            ]
+        ]
+    },
+    {
+        "id": "fb844e5c1e006cb6",
+        "type": "mqtt out",
+        "z": "f7b17fea9c45f501",
+        "name": "",
+        "topic": "project/ventilador/data",
+        "qos": "",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "b6d58b4a604ffe51",
+        "x": 660,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "49e8c220bee1a76d",
+        "type": "debug",
+        "z": "f7b17fea9c45f501",
+        "name": "debug 10",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "2961d4e773b6a55b",
+        "type": "comment",
+        "z": "f7b17fea9c45f501",
+        "name": "Configurar reteiner true",
+        "info": "",
+        "x": 260,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "46a2b4afe075664c",
+        "type": "mqtt out",
+        "z": "f7b17fea9c45f501",
+        "name": "",
+        "topic": "wearable/clima/data",
+        "qos": "",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "b6d58b4a604ffe51",
+        "x": 620,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "bb8a2e8c3952ab15",
+        "type": "inject",
+        "z": "f7b17fea9c45f501",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 250,
+        "y": 1140,
+        "wires": [
+            [
+                "00f5c8ebc0e96735"
+            ]
+        ]
+    },
+    {
+        "id": "00f5c8ebc0e96735",
+        "type": "function",
+        "z": "f7b17fea9c45f501",
+        "name": "function 12",
+        "func": "\n// Asignar el número aleatorio al payload del mensaje\nmsg.payload = 'Snow';\n\n// Devolver el mensaje\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 1140,
+        "wires": [
+            [
+                "46a2b4afe075664c",
+                "4bb8387c2d01f499"
+            ]
+        ]
+    },
+    {
+        "id": "4bb8387c2d01f499",
+        "type": "debug",
+        "z": "f7b17fea9c45f501",
+        "name": "debug 11",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 600,
+        "y": 1200,
+        "wires": []
+    },
+    {
+        "id": "33d91667498d570b",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "broker.emqx.io",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "b6d58b4a604ffe51",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "broker.emqx.io",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]
