@@ -373,12 +373,14 @@ class Player:
 ### Test
 ![image](https://github.com/user-attachments/assets/44db9dc7-54d0-457d-8c47-f4fa80ce26e9)
 
-
 ## Video demostracion
 [Link del video](https://drive.google.com/file/d/1IX2vUpmbipwm-nlV36v6pP7F3DbX74k3/view?usp=sharing)
 
 ## Carta de agradecimiento
-![Carta](./Imagenes/Carta_Agradecimiento.jpg)
+![Carta](./Imagenes/Carta.PNG)
+
+### Video agradecimiento (presentación)
+[Link del video](https://drive.google.com/file/d/1JHMdj4cdA24k0qymvwtmJ-ysDoh-p9ci/view?usp=sharing)
 
 ## Evidencias fotograficas
 ![image](./Imagenes/foto_1.jpg)
